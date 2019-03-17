@@ -116,9 +116,6 @@ public class Zadania_petle_calosc {
         int[] sortedArray2 = bubbleSort( unsortedArray2, temp_par);
         sortedArrayPrintout(sortedArray2);
 
-
-
-
         /*
             10.	Napisz metodę, która pobierze tablicę liczb całkowitych i posortuje ją w kolejności od najmniejszej do
             największej liczby.
@@ -135,7 +132,6 @@ public class Zadania_petle_calosc {
         int[] sortedArray = anotherSortingAlgorithm(unsortedArray, maxValue, sorted, position);
 
         sortedArrayPrintout(sortedArray);
-
 
 
     } // Koniec metody main
