@@ -1,6 +1,6 @@
 package pl.samouczek.zbior_zadan;
 
-public class Zadanie_TypProsty_1 {
+public class Zadanie1_TypProsty {
     public static void main(String[] args) {
 /*
         /*
