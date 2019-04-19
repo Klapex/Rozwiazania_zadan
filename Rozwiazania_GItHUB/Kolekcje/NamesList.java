@@ -16,8 +16,8 @@ public class NamesList {
          String name="";
          boolean contains=namesList.contains(name);
 
-         System.out.println("wprowadzanie unikalnych imion do bazy danych.");
-         System.out.println("wprowadz imie lub '-' aby zakonczyc.");
+         System.out.println("Wprowadzanie unikalnych imion do bazy danych.");
+         System.out.println("Wprowadz imie lub '-' aby zakonczyc.");
          while(true){
              System.out.println("Podaj imie:");
              name=input.nextLine();
@@ -25,17 +25,15 @@ public class NamesList {
                  System.out.println("Koniec wprowadzania.");
              break; }
              if(namesList.contains(name)){
-                 System.out.println("to imie zostalo wprowadzone");
+                 System.out.println("To imie zostalo juz wprowadzone wczesniej.");
              }
              else{ namesList.add(name);
-                 System.out.println("imie dodane do listy.");}
+                 System.out.println("Imie dodane do listy.");}
 
-
-             System.out.println("tutaj jest koniec petli while.");
          }
 
-         System.out.println("lista zawiera "+namesList.size()+" unikalnych imion.");
-         System.out.println("oto one:");
+         System.out.println("Lista zawiera "+namesList.size()+" unikalnych imion.");
+         System.out.println("Oto one:");
          for(String names:namesList){
              System.out.println(names);
          }
