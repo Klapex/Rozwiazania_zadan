@@ -17,7 +17,7 @@ public class NamesList {
          boolean contains=namesList.contains(name);
 
          System.out.println("wprowadzanie unikalnych imion do bazy danych.");
-         System.out.println("wprowadz '-' aby zakonczyc.");
+         System.out.println("wprowadz imie lub '-' aby zakonczyc.");
          while(true){
              System.out.println("Podaj imie:");
              name=input.nextLine();
