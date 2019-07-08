@@ -1,8 +1,9 @@
 package Shop_project.Shop_tests;
 
 /*
-test klasy Shop metody addToBasket i removeItem
+testy klasy Shop i Item
 */
+
 import Shop_project.Item;
 import Shop_project.Shop;
 import org.junit.After;
@@ -13,76 +14,99 @@ import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddItemToBasketTest{
-    public static Item item1,testItem2,testItem3;
-    public Shop testShop;
-    
-    public Map<Item,Integer> products;
+public class AddItemToBasketTest {
+    public static Item testItem1, testItem2, testItem3,testItem4;
+    public Map<Item, Integer> testProductsList;
 
     @Before
-    public void preparingTest(){
-        System.out.println("preparing list of products..");
-        testShop = new Shop();
+    public void preparingTest() {
+
+        System.out.println("Preparing list of products..");
+
         //preparing list of products
         //creating test items: (name, price)
-        item1 = new Item("testItem1",10);
-        testItem2 = new Item("testItem2",20);
-        testItem3 = new Item("testItem3",30);
-       
-        products = new HashMap<>();
-        products.put(item1,1);
-        products.put(testItem2,1);
-        products.put(testItem3,1);
 
-        System.out.println("test items added...");
+        testItem1 = new Item("testItem1", 10);
+        testItem2 = new Item("testItem2", 20);
+        testItem3 = new Item("testItem3", 30);
+        testItem4 = null;
+
+        testProductsList = new HashMap<>();
+
+        //adding testItems for removing from basket
+        testProductsList.put(testItem1, 2);
+        testProductsList.put(testItem2, 2);
+        testProductsList.put(testItem3, 2);
+
     }// end of preparingTest method
 
     @Test
-    public void checkIfItemsAreAdded(){
-        System.out.println("performing test checkIfItemsAreAdded...");
-                   
-        Shop.addItemToBasket(item1,5);
-        // -- nie wykonuje tej metody!!! --
-        Shop.addItemToBasket(testItem2,6);
-        Shop.addItemToBasket(testItem3,7);
-        
-        //performing test
-        Assert.assertTrue(products.containsKey(item1));//should return true
-        Assert.assertTrue(products.containsKey(testItem2));//should return true
-        Assert.assertTrue(products.containsKey(testItem3));//should return true
-        System.out.println("--end of test--");
-    
+    public void checkIfItemsAreAdded() {
+
+        System.out.println("Testing 'addItemToBasket' method...");
+
+        System.out.println("Adding products to basket...");
+        System.out.println("should return warning message?->-1");
+        Shop.addItemToBasket(testProductsList, testItem1, -1);
+        System.out.println("should return warning message 2nd time?->0");
+        Shop.addItemToBasket(testProductsList, testItem1, 0);
+        System.out.println("should return warning message 3rd time? -> null");
+        Shop.addItemToBasket(testProductsList, testItem4, 10);
+
+        Shop.addItemToBasket(testProductsList, testItem1, 1);
+        Shop.addItemToBasket(testProductsList, testItem2, 2);
+        Shop.addItemToBasket(testProductsList, testItem3, 3);
+
+        //Assertions  
+
+        Assert.assertTrue(testProductsList.containsKey(testItem1));//should return true
+        Assert.assertTrue(testProductsList.containsKey(testItem2));//should return true
+        Assert.assertTrue(testProductsList.containsKey(testItem3));//should return true
+        System.out.println("--end of 'checkIfItemsAreAdded' test--");
+
+    }//end of checkIfItemAreAdded method         
+
     @Test
-    public void checkIfItemsAreRemoved(){
-        System.out.println("performing test checkIfItemsAreRemoved...");
+    public void checkIfItemsAreRemoved() {
 
-        Shop.removeItem(item1,-1);
-        System.out.println("should return warning message?");
-        Shop.removeItem(item1,0);
-        System.out.println("should return warning message?");
-        
-        Shop.removeItem(item1,1);
-         // -- nie wykonuje tej metody!!! --
-        Shop.removeItem(testItem2,1);
-        Shop.removeItem(testItem3,1);
-//checking results
-        Assert.assertTrue(products.containsKey(item1));//should return false
-        Assert.assertTrue(products.containsKey(testItem2));//should return false
-        Assert.assertTrue(products.containsKey(testItem3));//should return false
+        System.out.println("Testing 'removeItem' method...");
+
+
+        System.out.println("should return warning message?->-1");
+        Shop.removeItem (testProductsList, testItem1, -1);
+        System.out.println("should return warning message 2nd time?->0");
+        Shop.removeItem(testProductsList, testItem1, 0);
+        System.out.println("should return warning message 3rd time? -> null");
+        Shop.removeItem(testProductsList, testItem4, 10);
+
+        Shop.removeItem(testProductsList, testItem1, 1);
+        Shop.removeItem(testProductsList, testItem2, 10);
+        Shop.removeItem(testProductsList, testItem3, 1);
+
+        // Assertions
+        Assert.assertTrue(testProductsList.containsKey(testItem1));//wszystkie powinny zwrocic true
+        Assert.assertFalse(testProductsList.containsKey(testItem2));
+        Assert.assertTrue(testProductsList.containsKey(testItem3));
+        System.out.println("--end of 'checkIfItemsAreRemoved' test--");
     }
+
+    @Test
+    public void equalsMethodTest(){
+
+        System.out.println(" Testing 'equals' method...");
+        System.out.println("item 1 (whey) = item2 (vitamins)?" + testItem1.equals(testItem2));
+        System.out.println("item 2 (vitamins) = item3 (whey)?" + testItem2.equals(testItem3));
+        System.out.println("item 3 (whey) = item3 (whey)?" + testItem3.equals(testItem3));
+        System.out.println("--end of 'equalsMethodTest' test--");
+    }
+
+
     @After
-    public void listOfProducts(){
-
-        int summaryPrice =0;
+    public void listOfProducts() {
         System.out.println("List of products in Test List");
-        for(Item item:products.keySet()){
-            int qty= products.get(item);
-            summaryPrice+=((item.getPrice())*qty);
-            System.out.println("Produkt:"+item.getName()+" cena:"+item.getPrice()+" ilosc:"+qty);
+        Shop.basketSummary(testProductsList);
 
-        }//end of for..each loop
-        System.out.println("- End of list -");
-       System.out.flush();
+        System.out.flush();
     }//end of listOfProducts method
 
 }//end of addToBasketTest class

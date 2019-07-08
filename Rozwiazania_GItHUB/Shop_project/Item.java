@@ -34,9 +34,6 @@ public class Item {
         return 17 * name.hashCode() + 31 * price;
     }//end of hash Code method
 
-    @Override
-    public String toString() {
-        return this.getClass().getName() + " produkt:" + this.name + " cena:" + this.price;
-    }
-
 }// end of Item class
+
+

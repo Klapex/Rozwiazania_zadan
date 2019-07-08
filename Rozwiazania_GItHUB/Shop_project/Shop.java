@@ -1,38 +1,49 @@
 package Shop_project;
 
-import java.util.Map;
+/*
+Przymiarka do zadania basket.
+1.porowanie obiektow  Item
+2. dodanie tych obiektow
+3. stworzenie listy
+4.
+*/
+
 import java.util.HashMap;
+import java.util.Map;
 
 public class Shop {
-    public static int qty = 0;
+
     public static int qtyInBasket = 0;
     public static Map<Item, Integer> products;
-    public static Item item1, item2, item3;
+    public static Item item1, item2, item3, item4;
 
 
     public static void main(String[] args) {
-        item1 = new Item("Whey protein", 10);
-        item2 = new Item("Multivitamins", 20);
-        //item3 = item1;
-        item3 = new Item("Whey protein", 64);
+
+
+        item1 = new Item("Whey protein", 20);
+        item2 = new Item("Multivitamins", 2);
+        item3 = new Item("Kreatyna", 45);
+        item4 = null;
+
         products = new HashMap<>();
-        addItemToBasket(item1, 120);
-        addItemToBasket(item2, 20);
+        addItemToBasket(products, item1, 5);
+        addItemToBasket(products, item2, 5);
+        addItemToBasket(products, item3, 5);
 
-        System.out.println("item 1 (whey) = item2 (vitamins)?" + item1.equals(item2));
-        System.out.println("item 2 (vitamins) = item3 (whey)?" + item2.equals(item3));
-        System.out.println("item 1 (whey) = item3 (whey)?" + item1.equals(item3));
-        basketSummary();
+        basketSummary(products);
 
-        removeItem(item1, 119);
-        removeItem(item2, 19);
+        removeItem(products, item1, 119);
+        removeItem(products, item2, 4);
+        removeItem(products, item3, 3);
 
-        basketSummary();
+        basketSummary(products);
     }//end of main method
 
-    public static void addItemToBasket(Item item, int qty) {
-        if (qty <= 0) {
-            System.out.println("Prosze podawac wartosci wieksze od zera.");
+    public static void addItemToBasket(Map<Item, Integer> products, Item item, int qty) {
+
+        if (item == null || qty <= 0) {
+            System.out.println("Niewlasciwa ilosc produktu lub produkt nie przekazany do koszyka.");
             return;
         }
         if (products.containsKey(item)) {
@@ -48,27 +59,28 @@ public class Shop {
 
     }//end of addToBasket method
 
-    public static void removeItem(Item item, int qty) {
-        if (qty <= 0) {
-            System.out.println("Prosze podawac wartosci wieksze od zera.");
+    public static void removeItem(Map<Item, Integer> products, Item item, int qty) {
+        if (item == null || qty <= 0) {
+            System.out.println("Niewlasciwa ilosc produktu lub nie produkt nie przekazany do koszyka.");
             return;
         }
         if (products.containsKey(item)) {
 
             qtyInBasket = products.get(item);//odczyt z mapy ile jest danego itemu w koszyku
             if (qtyInBasket <= qty) {
-                System.out.println("Usunieto produkt:" + item.getName() + "z koszyka");
+                System.out.println("Usunieto produkt:" + item.getName() + " z koszyka");
                 products.remove(item);
                 return;
+            } else {
+                qtyInBasket -= qty;
+                products.put(item, qtyInBasket);
+                System.out.println("Usunieto produkt:" + item.getName() + ",w ilosci:" + qty + " z koszyka");
             }
-            // gdy poprzedni if nie spelni warunku to:
-            qtyInBasket -= qty;
-            products.put(item, qtyInBasket);
         }
     }//end of removeItem method
 
-    public static void basketSummary() {
-//obliczanie sumarycznej kwoty zamowienia
+    public static void basketSummary(Map<Item, Integer> products) {
+
         System.out.println("Lista zamowienia:");
         int summaryPrice = 0;
         for (Item item : products.keySet()) {
@@ -77,5 +89,6 @@ public class Shop {
             System.out.println("Produkt:" + item.getName() + " cena:" + item.getPrice() + " ilosc:" + qty);
         }
         System.out.println("Sumaryczna cena:" + summaryPrice + " PLN");
+        System.out.println("- Koniec listy -");
     }//end of basketSummary
 }//end of shop class
