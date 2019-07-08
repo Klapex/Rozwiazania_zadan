@@ -1,11 +1,18 @@
 package Shop_project;
 
 /*
-Przymiarka do zadania basket.
-1.porowanie obiektow  Item
-2. dodanie tych obiektow
-3. stworzenie listy
-4.
+Zadanie basket.
+Napisz program, który będzie reprezentował koszyk w sklepie internetowym. 
+Do koszyka reprezentowanego przez klasę Basket możemy dodawać bądź usuwać 
+kolejne przedmioty. Każdy przedmiot powinien mieć nazwę i cenę jednostkową.
+Koszyk powinien także pozwalać na dodanie/usunięcie od razu kilku egzemplarzy
+przedmiotu ze sklepu. Koszyk powinien także być w stanie policzyć sumaryczną 
+wartość zamówienia oraz wyświetlić swoją zawartość. Pamiętaj o poprawnym obsłużeniu
+sytuacji wyjątkowych np. usunięcie elementów z pustego koszyka czy dodaniu ujemnej liczby przedmiotów.
+Napisz zestaw testów jednostkowych potwierdzających poprawne działanie Twojego koszyka z zakupami.
+Drobna podpowiedź z przykładowym zestawem klas, które mogą rozwiązać ten problem:
+Item, która posiada dwa atrybuty double price4 oraz String name,
+Basket, który posiada atrybut Map orderedItems reprezentujący zamówione towary wraz z ich ilością.
 */
 
 import java.util.HashMap;
